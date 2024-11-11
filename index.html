@@ -1,0 +1,137 @@
+<html>
+ <head>
+  <title>
+   Jadwal Sholat
+  </title>
+  <script src="https://cdn.tailwindcss.com">
+  </script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+  <script>
+   function updateClock() {
+            var now = new Date();
+            var hours = now.getHours();
+            var minutes = now.getMinutes();
+            var seconds = now.getSeconds();
+            var ampm = hours >= 12 ? 'PM' : 'AM';
+            hours = hours % 12;
+            hours = hours ? hours : 12; // the hour '0' should be '12'
+            minutes = minutes < 10 ? '0' + minutes : minutes;
+            seconds = seconds < 10 ? '0' + seconds : seconds;
+            var strTime = hours + ':' + minutes + ':' + seconds + ' ' + ampm;
+            document.getElementById('clock').innerText = strTime;
+        }
+        setInterval(updateClock, 1000);
+
+        var currentSlide = 0;
+        var slides = [
+            'ased/background2.jpeg',
+            'ased/background3.jpg',
+            'ased/BG.jpeg'
+        ];
+
+        function showSlide(index) {
+            var slidesContainer = document.getElementById('slides');
+            slidesContainer.innerHTML = '';
+            var img = document.createElement('img');
+            img.src = slides[index];
+            slidesContainer.appendChild(img);
+        }
+
+        function nextSlide() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        }
+
+        setInterval(nextSlide, 3000);
+  </script>
+ </head>
+ <body onload="updateClock(); showSlide(currentSlide);">
+  <nav class="navbar flex justify-between items-center">
+   <div class="flex items-center">
+    <img alt="Logo" class="mr-2" height="50" src="ased/LOGO.webp" width="50"/>
+    <span class="text-white text-xl">
+     Jadwal Sholat
+    </span>
+   </div>
+   <div class="flex items-center ml-auto">
+
+    <!-- <a href="#">
+     Home
+    </a>
+    <a href="#">
+     Services
+    </a> -->
+    
+    <a href="#" id="date">
+    </a>
+    <div class="bg-[#d19b7f] text-white py-2 px-4 ml-4">
+     <span id="clock">
+     </span>
+    </div>
+   </div>
+  </nav>
+  <div class="hero">
+   <div id="slides">
+   </div>
+   <div class="overlay">
+    <h1 class="text-5xl font-bold">
+     Jadwal Sholat Hari Ini
+    </h1>
+    <p class="mt-4">
+     Berikut adalah jadwal sholat untuk hari ini. Pastikan untuk melaksanakan sholat tepat waktu.
+    </p>
+   </div>
+   <div class="schedule">
+    <div>
+     <p>
+      Subuh
+     </p>
+     <p class="text-2xl">
+      04:30
+     </p>
+    </div>
+    <div>
+     <p>
+      Dzuhur
+     </p>
+     <p class="text-2xl">
+      12:00
+     </p>
+    </div>
+    <div>
+     <p>
+      Ashar
+     </p>
+     <p class="text-2xl">
+      15:30
+     </p>
+    </div>
+    <div>
+     <p>
+      Maghrib
+     </p>
+     <p class="text-2xl">
+      18:00
+     </p>
+    </div>
+    <div>
+     <p>
+      Isya
+     </p>
+     <p class="text-2xl">
+      19:30
+     </p>
+    </div>
+   </div>
+  </div>
+  <script>
+    const today = new Date();
+    const day = String(today.getDate()).padStart(2, '0');
+    const month = String(today.getMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+    const year = today.getFullYear();
+    document.getElementById('date').innerText = `Tanggal : ${day}-${month}-${year}`;
+</script>
+ </body>
+</html>
